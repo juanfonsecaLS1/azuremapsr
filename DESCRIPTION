@@ -1,6 +1,6 @@
 Package: azuremapsr
 Title: An R Interface to the Azure Maps API
-Version: 0.0.0.9000
+Version: 0.0.0.999
 Authors@R: c(
     person("Juan P.", "Fonseca-Zamora", email = "ts18jpf@leeds.ac.uk", role = c("aut", "cre"))
   )
