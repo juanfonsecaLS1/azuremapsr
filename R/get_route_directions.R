@@ -1,31 +1,32 @@
-#' Title
+#' Get Route Directions from Azure Maps
 #'
-#' @param origin
-#' @param destination
-#' @param waypoints
-#' @param params
-#' @param tz
-#' @param api_key
-#' @param api_version
+#' Requests route directions from Azure Maps API using origin, destination, waypoints, and route parameters.
 #'
-#' @returns
+#' @param origin A numeric vector of length 2 with origin coordinates (longitude, latitude), or an `sf` object with a single POINT geometry.
+#' @param destination A numeric vector of length 2 with destination coordinates (longitude, latitude), or an `sf` object with a single POINT geometry.
+#' @param waypoints Optional. A numeric vector, a matrix of coordinates, or an `sf` object with POINT geometries representing intermediate stops.
+#' @param params A list of route parameters (e.g., `optimizeRoute`, `routeOutputOptions`, `maxRouteCount`, `travelMode`).
+#' @param tz A string specifying the timezone. Defaults to the system's timezone.
+#' @param api_key The Azure Maps API key. Defaults to the value retrieved by `get_azuremaps_token()`.
+#' @param api_version The API version to use. Defaults to "2025-01-01".
+#'
+#' @return An `httr2_response` object from the Azure Maps API.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' origin <- c(-122.201399,47.608678)
-#' destination <- c(-122.201669,47.615076)
-#' waypoints <- c(-122.20687,47.612002)
+#' origin <- c(-122.201399, 47.608678)
+#' destination <- c(-122.201669, 47.615076)
+#' waypoints <- c(-122.20687, 47.612002)
 #'
-#'
-#' params = list(
+#' params <- list(
 #'   optimizeRoute = "fastestWithTraffic",
 #'   routeOutputOptions = "routePath",
 #'   maxRouteCount = 3,
 #'   travelMode = "driving"
 #' )
 #'
-#' get_route_directions(origin, destination, waypoints, params)
+#' response <- get_route_directions(origin, destination, waypoints, params)
 #' }
 #'
 get_route_directions <- function(origin,
@@ -60,12 +61,12 @@ get_route_directions <- function(origin,
 
   header <- list(`Content-Type` = "application/geo+json",`subscription-key` = api_key)
 
-  req <- request(base_url) |>
-    req_url_query(!!!api_params) |>
-    req_headers_redacted(!!!header) |>
-    req_body_raw(full_body, type = "application/geo+json")
+  req <- httr2::request(base_url) |>
+    httr2::req_url_query(!!!api_params) |>
+    httr2::req_headers_redacted(!!!header) |>
+    httr2::req_body_raw(full_body, type = "application/geo+json")
 
-  resp <- req |> req_perform()
+  resp <- req |> httr2::req_perform()
 
   resp
 }

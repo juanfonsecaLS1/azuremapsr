@@ -2,22 +2,21 @@
 % Please edit documentation in R/auth.R
 \name{set_azuremaps_token}
 \alias{set_azuremaps_token}
-\title{Saves an Authentication Token for the Azure Maps API}
+\title{Set Azure Maps API Authentication Token}
 \usage{
 set_azuremaps_token(token)
 }
 \arguments{
-\item{token}{a \code{string} with the token}
+\item{token}{A character string containing the Azure Maps API token.}
 }
 \value{
-TRUE if token correctly set
+Logical TRUE if the token is correctly set.
 }
 \description{
-Saves an Authentication Token for the Azure Maps API
+Saves an authentication token for the Azure Maps API in the environment.
 }
 \examples{
-
-mytoken <- "ivRgw7ZAGFedfwIdASezecdnETZDsdETB4Bqv3pbs5X8JDNnt1pQtpxDmpR6as2k"
-set_azuremaps_token(mytoken)
-
+\dontrun{
+set_azuremaps_token("your_token_here")
+}
 }

@@ -1,13 +1,26 @@
-#' Title
+#' Build GeoJSON Body for Route Directions
 #'
-#' @param origin
-#' @param destination
-#' @param waypoints
+#' Constructs the GeoJSON part of the request body for the Azure Maps Route 
+#' Directions API. This includes the origin, destination, and any waypoints.
 #'
-#' @returns
+#' @param origin A numeric vector of coordinates (longitude, latitude) or an `sf` 
+#'   object representing the starting point.
+#' @param destination A numeric vector of coordinates (longitude, latitude) or an 
+#'   `sf` object representing the end point.
+#' @param waypoints Optional. A numeric vector, a matrix of coordinates, or an 
+#'   `sf` object with POINT geometries for intermediate stops.
+#'
+#' @return A list formatted as a GeoJSON FeatureCollection, ready to be 
+#'   included in the API request body.
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' origin <- c(-122.201399, 47.608678)
+#' destination <- c(-122.201669, 47.615076)
+#' waypoints <- c(-122.20687, 47.612002)
+#' geojson_part <- POSTbody_builder_directions_geojson(origin, destination, waypoints)
+#' }
 POSTbody_builder_directions_geojson <- function(origin,
                                                 destination,
                                                 waypoints = NULL){
@@ -42,15 +55,27 @@ POSTbody_builder_directions_geojson <- function(origin,
 }
 
 
-#' Title
+#' Build JSON Parameter Body for Route Directions
 #'
-#' @param params
-#' @param tz
+#' Constructs the JSON part of the request body containing routing parameters 
+#' for the Azure Maps Route Directions API.
 #'
-#' @returns
+#' @param params A list of routing parameters, such as `travelMode`, 
+#'   `routeType`, `departAt`, etc.
+#' @param tz A string specifying the timezone for any date-time parameters.
+#'
+#' @return A list of routing parameters, with values formatted and unboxed as 
+#'   required for the JSON request.
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' params <- list(
+#'   travelMode = "car",
+#'   routeType = "fastest"
+#' )
+#' json_part <- POSTbody_builder_directions_json(params, "UTC")
+#' }
 POSTbody_builder_directions_json <- function(params,tz){
 
   template_params <- pkg.env$template_params_directions

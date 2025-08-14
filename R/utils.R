@@ -77,14 +77,14 @@ pkg.env$template_params_directions <- list(
 
 check_params <- function(test_params, template_params,tz){
 
-  if (sum(duplicated(names(params)))>0){
-    dupl_names <- unique(names(params)[duplicated(names(params))])
+  if (sum(duplicated(names(test_params)))>0){
+    dupl_names <- unique(names(test_params)[duplicated(names(test_params))])
     stop("There are some duplicated names in params",
          paste(dupl_names,collapse = ", "),call. = FALSE)
   }
 
-  if (!all(names(params) %in% names(template_params))){
-    different_names <- names(params)[!(names(params) %in% names(template_params))]
+  if (!all(names(test_params) %in% names(template_params))){
+    different_names <- names(test_params)[!(names(test_params) %in% names(template_params))]
     stop("Elements in the params list do not match allowed arguments:",
          paste(different_names,collapse = ", "),call. = FALSE)
   }
@@ -160,7 +160,7 @@ check_params <- function(test_params, template_params,tz){
     )
   }
 
-  if(sum(c("departAt","arriveAt") %in% names(params))>1){
+  if(sum(c("departAt","arriveAt") %in% names(test_params))>1){
     stop("departAt  and arriveAt cannot be provided at the same time")
   }
 
