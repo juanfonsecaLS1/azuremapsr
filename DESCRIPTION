@@ -1,0 +1,20 @@
+Package: azuremapsr
+Title: A wraper for the Azure Maps APi
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Juan P.", "Fonseca-Zamora", , "ts18jpf@leeds.ac.uk", role = c("aut", "cre"))
+  )
+Description: What the package does (one paragraph).
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports: 
+    geojsonsf (>= 2.0.3),
+    httr2 (>= 1.2.1),
+    jsonlite (>= 2.0.0),
+    lubridate (>= 1.9.4),
+    sf (>= 1.0.21),
+    stringr (>= 1.5.1)
+Depends: 
+    R (>= 4.1.0)
