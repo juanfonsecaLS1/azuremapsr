@@ -62,7 +62,7 @@ params <- list(
 # Get the route (requires a valid API key to be set)
 # The code is wrapped in try() to handle cases where the key is not set
 response <- try(
-  get_route_directions(origin, destination, waypoints, params),
+  req_route_directions(origin, destination, waypoints, params),
   silent = TRUE
 )
 ```

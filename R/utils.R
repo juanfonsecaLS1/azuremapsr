@@ -167,3 +167,72 @@ check_params <- function(test_params, template_params,tz){
   return(NULL)
 
 }
+
+
+
+json_to_sf <- function(body,
+                       main_route = TRUE,
+                       linestring = TRUE){
+
+
+
+  # verify if geojson is present
+
+  if(main_route){
+    body[["alternativeRoutes"]] <- NULL
+  } else {
+    body <- unlist(body[["alternativeRoutes"]],recursive = F)
+  }
+
+  if (is.null(body)){
+    return(NULL)
+  }
+
+  if(body$type!="FeatureCollection"){
+    return(NULL)
+  }
+
+  body$type <- unbox(body$type)
+
+  null_feature = ifelse(linestring,"Point","MultiLineString")
+
+
+  body$features <- lapply(body$features, function(x){
+    if (x$geometry$type == null_feature){
+      return(NULL)
+    }else{
+      x
+    }
+  }
+  )
+
+  body <- rlist::list.clean(body,recursive = T)
+
+
+  for (i in seq_along(body$features)){
+
+    coords_depth <- purrr::pluck_depth(body$features[[i]]$geometry$coordinates)
+
+    if(coords_depth>2){
+      new_coords <- purrr::modify_depth(body$features[[i]]$geometry$coordinates,
+                                        .depth = coords_depth - 2,
+                                        .f = unlist)
+    }else{
+      new_coords <- unlist(body$features[[i]]$geometry$coordinates)
+    }
+
+
+    body$features[[i]]$geometry$coordinates <- new_coords
+
+  }
+
+
+  # transform json to geojson and then to sf
+  body_json <- body |> jsonlite::toJSON(auto_unbox = T) |> geojsonsf::geojson_sf()
+
+  # export
+  return(body_json)
+
+
+}
+

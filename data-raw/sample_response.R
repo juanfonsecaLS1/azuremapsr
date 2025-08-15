@@ -13,6 +13,6 @@ params <- list(
   travelMode = "driving"
 )
 
-sample_response <- get_route_directions(origin, destination, waypoints, params)
+sample_response <- req_route_directions(origin, destination, waypoints, params)
 
 usethis::use_data(sample_response, overwrite = TRUE)

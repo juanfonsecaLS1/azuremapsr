@@ -16,6 +16,7 @@ Imports:
     httr2 (>= 1.2.1),
     jsonlite (>= 2.0.0),
     lubridate (>= 1.9.4),
+    rlist (>= 0.4.6.2),
     sf (>= 1.0.21),
     stringr (>= 1.5.1)
 Depends: 

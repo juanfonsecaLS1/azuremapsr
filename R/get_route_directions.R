@@ -26,10 +26,10 @@
 #'   travelMode = "driving"
 #' )
 #'
-#' response <- get_route_directions(origin, destination, waypoints, params)
+#' response <- req_route_directions(origin, destination, waypoints, params)
 #' }
 #'
-get_route_directions <- function(origin,
+req_route_directions <- function(origin,
                                  destination,
                                  waypoints = NULL,
                                  params,
@@ -70,3 +70,22 @@ get_route_directions <- function(origin,
 
   resp
 }
+
+
+get_routes <- function(resp){
+  if(resp$status_code != 200) {
+    stop("Request was not succesfull",call. = FALSE)
+  }
+
+  body <- resp |> httr2::resp_body_json()
+
+  main_route <- json_to_sf(body)
+  alt_routes <- json_to_sf(body, main_route = FALSE)
+
+  rbind(main_route,alt_routes)
+
+}
+
+
+
+

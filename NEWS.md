@@ -2,9 +2,9 @@
 
 * Initial CRAN submission.
 
-* Fully functional `get_route_directions` implementation
+* Fully functional `req_route_directions` implementation
 
 
 ## To do:
 
-- Create functions for processing responses from the `get_route_directions`.
+- Create functions for processing responses from the `req_route_directions`.
