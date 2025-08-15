@@ -6,3 +6,4 @@
 ^previous_work/.*
 ^cran-comments\.md$
 ^README\.qmd$
+^data-raw$

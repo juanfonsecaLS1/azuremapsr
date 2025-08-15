@@ -20,3 +20,4 @@ Imports:
     stringr (>= 1.5.1)
 Depends: 
     R (>= 4.1.0)
+LazyData: true
