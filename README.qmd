@@ -36,12 +36,19 @@ For a more permanent solution, you can store the key as an environment variable 
 
 ## Example
 
+```{r}
+#| eval: true
+#| include: false
+devtools::load_all()
+
+```
+
+
 This example shows how to get the fastest driving route between two points including a waypoint.
 
 ```{r example, eval=FALSE, message=FALSE, warning=FALSE}
 library(azuremapsr)
 library(sf)
-library(httr2)
 
 # This example will not run unless an API key is set.
 # Replace "YOUR_API_KEY_HERE" with your actual key.
@@ -59,10 +66,27 @@ params <- list(
   travelMode = "driving"
 )
 
-# Get the route (requires a valid API key to be set)
-# The code is wrapped in try() to handle cases where the key is not set
-response <- try(
-  req_route_directions(origin, destination, waypoints, params),
-  silent = TRUE
-)
+# Get the route (requires a valid API key to be set!!!)
+
+sample_response <-   req_route_directions(origin, destination, waypoints, params)
 ```
+
+Routes can be extracted from the response with the `get_routes` function
+
+```{r}
+#| label: get-routes
+
+sf_routes <- get_routes(sample_response)
+
+plot(sf_routes$geometry,col = c("blue","red"))
+```
+
+
+These are some of the attributes returned by the service:
+```{r}
+#| label: names-routes
+
+sf_routes |> names()
+```
+
+

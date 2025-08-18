@@ -2,9 +2,9 @@
 
 * Initial CRAN submission.
 
-* Fully functional `req_route_directions` implementation
+* Fully functional `req_route_directions` and `get_routes`
 
 
 ## To do:
 
-- Create functions for processing responses from the `req_route_directions`.
+- Create a function to use the batch API

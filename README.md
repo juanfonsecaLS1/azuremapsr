@@ -53,7 +53,6 @@ points including a waypoint.
 ``` r
 library(azuremapsr)
 library(sf)
-library(httr2)
 
 # This example will not run unless an API key is set.
 # Replace "YOUR_API_KEY_HERE" with your actual key.
@@ -71,10 +70,29 @@ params <- list(
   travelMode = "driving"
 )
 
-# Get the route (requires a valid API key to be set)
-# The code is wrapped in try() to handle cases where the key is not set
-response <- try(
-  get_route_directions(origin, destination, waypoints, params),
-  silent = TRUE
-)
+# Get the route (requires a valid API key to be set!!!)
+
+sample_response <-   req_route_directions(origin, destination, waypoints, params)
 ```
+
+Routes can be extracted from the response with the `get_routes` function
+
+``` r
+sf_routes <- get_routes(sample_response)
+
+plot(sf_routes$geometry,col = c("blue","red"))
+```
+
+![](README_files/figure-commonmark/get-routes-1.png)
+
+These are some of the attributes returned by the service:
+
+``` r
+sf_routes |> names()
+```
+
+    [1] "trafficCongestion"        "distanceInMeters"        
+    [3] "durationInSeconds"        "arrivalAt"               
+    [5] "departureAt"              "durationTrafficInSeconds"
+    [7] "type"                     "legs"                    
+    [9] "geometry"                

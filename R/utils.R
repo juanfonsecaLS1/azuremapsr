@@ -170,6 +170,29 @@ check_params <- function(test_params, template_params,tz){
 
 
 
+#' Convert Azure Maps JSON Response to an sf Object
+#'
+#' This function processes a JSON response body from the Azure Maps API,
+#' extracts the route information, and converts it into a spatial (`sf`) object.
+#'
+#' @param body A list, typically the parsed JSON response from an httr2 request.
+#' @param main_route A logical value. If `TRUE` (the default), only the main
+#'   route is processed. If `FALSE`, alternative routes are processed instead.
+#' @param linestring A logical value. If `TRUE` (the default), it filters for
+#'   LineString geometries (the route path).
+#'
+#' @return An `sf` object containing the spatial features from the route response,
+#'   or `NULL` if no valid features are found.
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # Assuming 'resp' is an httr2 response object from req_route_directions
+#' body <- httr2::resp_body_json(resp)
+#' route_sf <- json_to_sf(body)
+#' plot(sf::st_geometry(route_sf))
+#' }
 json_to_sf <- function(body,
                        main_route = TRUE,
                        linestring = TRUE){
@@ -192,7 +215,7 @@ json_to_sf <- function(body,
     return(NULL)
   }
 
-  body$type <- unbox(body$type)
+  body$type <- jsonlite::unbox(body$type)
 
   null_feature = ifelse(linestring,"Point","MultiLineString")
 

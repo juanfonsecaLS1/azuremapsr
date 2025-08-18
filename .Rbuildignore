@@ -3,7 +3,8 @@
 ^LICENSE\.md$
 
 
-^previous_work/.*
+^previous_work/.*$
 ^cran-comments\.md$
 ^README\.qmd$
 ^data-raw$
+^README_files/.*$

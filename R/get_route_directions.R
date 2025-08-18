@@ -69,9 +69,31 @@ req_route_directions <- function(origin,
   resp <- req |> httr2::req_perform()
 
   resp
+
 }
 
 
+#' Extract and Combine Routes from an Azure Maps Response
+#'
+#' This function takes a successful response object from the Azure Maps API,
+#' extracts the main route and any alternative routes, and combines them into a
+#' single `sf` object.
+#'
+#' @param resp An `httr2_response` object, typically from a successful call to
+#'   `req_route_directions`.
+#'
+#' @return An `sf` object containing the combined main and alternative routes.
+#'   If the request was not successful (status code is not 200), the function
+#'   will stop with an error.
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # Assuming 'response' is a successful response from req_route_directions
+#' all_routes_sf <- get_routes(response)
+#' plot(sf::st_geometry(all_routes_sf))
+#' }
 get_routes <- function(resp){
   if(resp$status_code != 200) {
     stop("Request was not succesfull",call. = FALSE)
