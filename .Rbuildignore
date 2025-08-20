@@ -8,3 +8,4 @@
 ^README\.qmd$
 ^data-raw$
 ^README_files/.*$
+^CRAN-SUBMISSION$

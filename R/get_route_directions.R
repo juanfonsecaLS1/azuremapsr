@@ -1,16 +1,16 @@
-#' Get Route Directions from Azure Maps
+#' Get Route Directions from 'Azure Maps'
 #'
-#' Requests route directions from Azure Maps API using origin, destination, waypoints, and route parameters.
+#' Requests route directions from 'Azure Maps' API using origin, destination, waypoints, and route parameters.
 #'
 #' @param origin A numeric vector of length 2 with origin coordinates (longitude, latitude), or an `sf` object with a single POINT geometry.
 #' @param destination A numeric vector of length 2 with destination coordinates (longitude, latitude), or an `sf` object with a single POINT geometry.
 #' @param waypoints Optional. A numeric vector, a matrix of coordinates, or an `sf` object with POINT geometries representing intermediate stops.
-#' @param params A list of route parameters (e.g., `optimizeRoute`, `routeOutputOptions`, `maxRouteCount`, `travelMode`).
+#' @param params A list of route parameters (e.g., `optimizeRoute`, `routeOutputOptions`, `maxRouteCount`, `travelMode`). See the [API documentation](https://learn.microsoft.com/en-us/rest/api/maps/route/post-route-directions?view=rest-maps-2025-01-01&tabs=HTTP)
 #' @param tz A string specifying the timezone. Defaults to the system's timezone.
-#' @param api_key The Azure Maps API key. Defaults to the value retrieved by `get_azuremaps_token()`.
+#' @param api_key The 'Azure Maps' API key. Defaults to the value retrieved by `get_azuremaps_token()`.
 #' @param api_version The API version to use. Defaults to "2025-01-01".
 #'
-#' @return An `httr2_response` object from the Azure Maps API.
+#' @return An `httr2_response` object from the 'Azure Maps' API.
 #' @export
 #'
 #' @examples
@@ -73,9 +73,9 @@ req_route_directions <- function(origin,
 }
 
 
-#' Extract and Combine Routes from an Azure Maps Response
+#' Extract and Combine Routes from an 'Azure Maps' Response
 #'
-#' This function takes a successful response object from the Azure Maps API,
+#' This function takes a successful response object from the 'Azure Maps' API,
 #' extracts the main route and any alternative routes, and combines them into a
 #' single `sf` object.
 #'

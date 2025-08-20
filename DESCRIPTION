@@ -1,18 +1,17 @@
 Package: azuremapsr
-Title: An R Interface to the Azure Maps API
+Title: Interface to the 'Azure Maps' API
 Version: 0.0.1
 Authors@R: c(
     person("Juan P.", "Fonseca-Zamora",
     email = "ts18jpf@leeds.ac.uk",
     role = c("aut", "cre"))
   )
-Description: Provides a wrapper for the Microsoft 'Azure Maps' REST APIs,
+Description: Provides a wrapper for the Microsoft 'Azure Maps' REST APIs <https://learn.microsoft.com/en-us/rest/api/maps/route?view=rest-maps-2025-01-01>,
     enabling users to access mapping and geospatial services directly from R.
     This package simplifies authenticating, building, and sending requests for
     services like route directions. It handles conversions between R objects
-    (such as 'sf' objects) and the GeoJSON+JSON format required by the API
-    version "2025-01-01", making it easier to integrate 'Azure Maps' 
-    into R-based data analysis workflows.
+    (such as 'sf' objects) and the GeoJSON+JSON format required by the API,
+     making it easier to integrate 'Azure Maps' into R-based data analysis workflows.
 License: GPL (>= 3)
 Encoding: UTF-8
 URL: https://github.com/juanfonsecaLS1/azuremapsr

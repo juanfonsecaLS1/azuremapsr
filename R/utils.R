@@ -68,7 +68,7 @@ pkg.env$template_params_directions <- list(
 #'
 #' @export
 #'
-#' @returns NULL
+#' @returns No return value, called for side effects
 #'
 #' @examples
 #' \dontrun{
@@ -170,7 +170,7 @@ check_params <- function(test_params, template_params,tz){
 
 
 
-#' Convert Azure Maps JSON Response to an sf Object
+#' Convert 'Azure Maps' JSON Response to an sf Object
 #'
 #' This function processes a JSON response body from the Azure Maps API,
 #' extracts the route information, and converts it into a spatial (`sf`) object.
