@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{json_to_sf}
 \alias{json_to_sf}
-\title{Convert Azure Maps JSON Response to an sf Object}
+\title{Convert 'Azure Maps' JSON Response to an sf Object}
 \usage{
 json_to_sf(body, main_route = TRUE, linestring = TRUE)
 }

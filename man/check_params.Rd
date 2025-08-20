@@ -13,6 +13,9 @@ check_params(test_params, template_params, tz)
 
 \item{tz}{timezone from input}
 }
+\value{
+No return value, called for side effects
+}
 \description{
 check conformity of parameters for JSON section
 }

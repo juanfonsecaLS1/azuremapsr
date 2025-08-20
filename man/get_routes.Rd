@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_route_directions.R
 \name{get_routes}
 \alias{get_routes}
-\title{Extract and Combine Routes from an Azure Maps Response}
+\title{Extract and Combine Routes from an 'Azure Maps' Response}
 \usage{
 get_routes(resp)
 }
@@ -16,7 +16,7 @@ If the request was not successful (status code is not 200), the function
 will stop with an error.
 }
 \description{
-This function takes a successful response object from the Azure Maps API,
+This function takes a successful response object from the 'Azure Maps' API,
 extracts the main route and any alternative routes, and combines them into a
 single \code{sf} object.
 }

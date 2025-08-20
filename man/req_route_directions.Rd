@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_route_directions.R
 \name{req_route_directions}
 \alias{req_route_directions}
-\title{Get Route Directions from Azure Maps}
+\title{Get Route Directions from 'Azure Maps'}
 \usage{
 req_route_directions(
   origin,
@@ -21,19 +21,19 @@ req_route_directions(
 
 \item{waypoints}{Optional. A numeric vector, a matrix of coordinates, or an \code{sf} object with POINT geometries representing intermediate stops.}
 
-\item{params}{A list of route parameters (e.g., \code{optimizeRoute}, \code{routeOutputOptions}, \code{maxRouteCount}, \code{travelMode}).}
+\item{params}{A list of route parameters (e.g., \code{optimizeRoute}, \code{routeOutputOptions}, \code{maxRouteCount}, \code{travelMode}). See the \href{https://learn.microsoft.com/en-us/rest/api/maps/route/post-route-directions?view=rest-maps-2025-01-01&tabs=HTTP}{API documentation}}
 
 \item{tz}{A string specifying the timezone. Defaults to the system's timezone.}
 
-\item{api_key}{The Azure Maps API key. Defaults to the value retrieved by \code{get_azuremaps_token()}.}
+\item{api_key}{The 'Azure Maps' API key. Defaults to the value retrieved by \code{get_azuremaps_token()}.}
 
 \item{api_version}{The API version to use. Defaults to "2025-01-01".}
 }
 \value{
-An \code{httr2_response} object from the Azure Maps API.
+An \code{httr2_response} object from the 'Azure Maps' API.
 }
 \description{
-Requests route directions from Azure Maps API using origin, destination, waypoints, and route parameters.
+Requests route directions from 'Azure Maps' API using origin, destination, waypoints, and route parameters.
 }
 \examples{
 \dontrun{
