@@ -1,10 +1,9 @@
 # azuremapsr (development version)
 
-# azuremapsr 0.0.1
 
-* Initial CRAN submission.
+# azuremapsr 0.0.1 (CRAN submission)
 
-* Fully functional `req_route_directions` and `get_routes`
+- Fully functional `req_route_directions` and `get_routes`
 
 
 ## To do:
