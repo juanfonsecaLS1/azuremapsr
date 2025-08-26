@@ -1,3 +1,5 @@
+# azuremapsr (development version)
+
 # azuremapsr 0.0.1
 
 * Initial CRAN submission.
