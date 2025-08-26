@@ -4,8 +4,7 @@
 
 <!-- badges: start -->
 
-[![CRAN
-status](https://www.r-pkg.org/badges/version/azuremapsr.png)](https://CRAN.R-project.org/package=azuremapsr)
+[![](https://www.r-pkg.org/badges/version/azuremapsr)](https://cran.r-project.org/package=azuremapsr)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![License: GPL
