@@ -4,8 +4,10 @@
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/azuremapsr.png)](https://CRAN.R-project.org/package=azuremapsr)
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
@@ -18,7 +20,14 @@ geospatial services, starting with route directions.
 
 ## Installation
 
-You can install the development version of `azuremapsr` from
+You can install the latest stable version of `azuremapsr` from CRAN
+with:
+
+``` r
+install.packages("azuremapsr")   
+```
+
+You can also install the development version of `azuremapsr` from
 [GitHub](https://github.com/) with:
 
 ``` r

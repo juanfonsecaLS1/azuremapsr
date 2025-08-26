@@ -6,7 +6,9 @@ format: gfm
 
 <!-- badges: start -->
 
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![CRAN status](https://www.r-pkg.org/badges/version/azuremapsr)](https://CRAN.R-project.org/package=azuremapsr)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 <!-- badges: end -->
 
@@ -14,7 +16,13 @@ The goal of `azuremapsr` is to provide an R interface to the Microsoft Azure Map
 
 ## Installation
 
-You can install the development version of `azuremapsr` from [GitHub](https://github.com/) with:
+You can install the latest stable version of `azuremapsr` from CRAN with:
+
+```r
+install.packages("azuremapsr")   
+```
+
+You can also install the development version of `azuremapsr` from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
