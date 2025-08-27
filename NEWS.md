@@ -1,4 +1,4 @@
-# azuremapsr (development version)
+# azuremapsr 0.0.2
 
 - Fixed bug in `POSTbody_builder_directions_geojson` when waypoints were not provided
 
