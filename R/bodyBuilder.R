@@ -31,6 +31,8 @@ POSTbody_builder_directions_geojson <- function(origin,
 
   if(!is.null(waypoints)){
     sfc_waypoints <- get_point(waypoints)
+  } else {
+    sfc_waypoints <- NULL
   }
 
   sf_body <- sf::st_as_sf(c(sfc_origin,sfc_waypoints,sfc_destination))
