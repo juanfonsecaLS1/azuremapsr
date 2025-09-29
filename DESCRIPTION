@@ -18,7 +18,7 @@ Encoding: UTF-8
 URL: https://github.com/juanfonsecaLS1/azuremapsr
 BugReports: https://github.com/juanfonsecaLS1/azuremapsr/issues
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Imports: 
     geojsonsf (>= 2.0.3),
     httr2 (>= 1.2.1),
