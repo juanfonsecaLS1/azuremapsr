@@ -4,7 +4,8 @@ Version: 0.0.2.9000
 Authors@R: c(
     person("Juan P.", "Fonseca-Zamora",
     email = "ts18jpf@leeds.ac.uk",
-    role = c("aut", "cre"))
+    role = c("aut", "cre"),
+    comment = c(ORCID = "0009-0006-7042-3828"))
   )
 Description: Provides a wrapper for the Microsoft 'Azure Maps' REST APIs <https://learn.microsoft.com/en-us/rest/api/maps/route?view=rest-maps-2025-01-01>,
     enabling users to access mapping and geospatial services directly from R.
