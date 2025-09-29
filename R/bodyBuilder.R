@@ -31,7 +31,7 @@ POSTbody_builder_directions_geojson <- function(
   sfc_destination <- get_point(destination)
 
   if (!is.null(waypoints)) {
-    sfc_waypoints <- get_point(waypoints)
+    sfc_waypoints <- get_point(waypoints, multiple = TRUE)
   } else {
     sfc_waypoints <- NULL
   }
