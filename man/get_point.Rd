@@ -35,8 +35,17 @@ Only POINT geometries are supported. The output is always in EPSG:4326.
 }
 \examples{
 get_point(c(-122.201399, 47.608678))
-get_point(matrix(c(-122.201399, 47.608678, -122.202, 47.609), ncol = 2, byrow = TRUE), multiple = TRUE)
+get_point(
+  matrix(
+    c(-122.201399, 47.608678, -122.202, 47.609),
+    ncol = 2,
+    byrow = TRUE
+  ),
+  multiple = TRUE
+)
 library(sf)
-pt <- st_sf(geometry = st_sfc(st_point(c(-122.201399, 47.608678)), crs = 4326))
+pt <- st_sf(
+  geometry = st_sfc(st_point(c(-122.201399, 47.608678)), crs = 4326)
+)
 get_point(pt)
 }
