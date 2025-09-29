@@ -17,7 +17,7 @@ get_point <- function(x) {
 #' @rdname get_point
 #' @export
 get_point.default <- function(x) {
-  stop("Points should be either numeric vectors with coordinates or sf objects")
+  stop("Points should be provided as a numeric vector/matrix or sf object!")
 }
 
 
@@ -25,7 +25,7 @@ get_point.default <- function(x) {
 #' @export
 get_point.numeric <- function(x) {
   if (length(x) != 2) {
-    stop("Point coordinates should be a vector with two values!")
+    stop("Point coordinates must be a vector with two values!")
   }
 
   sf::st_sfc(sf::st_point(x), crs = 4326)
@@ -35,6 +35,10 @@ get_point.numeric <- function(x) {
 #' @rdname get_point
 #' @export
 get_point.matrix <- function(x) {
+  if (ncol(x) != 2) {
+    stop("Number of coordinates in matrix is not 2!")
+  }
+
   do.call(c, lapply(1:nrow(x), function(i) get_point(x[i, ])))
 }
 
