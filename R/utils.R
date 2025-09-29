@@ -1,9 +1,11 @@
 pkg.env <- new.env(parent = emptyenv())
 
 pkg.env$template_params_directions <- list(
-  arriveAt = list(values = lubridate::as_datetime("2020-01-01 10:30:00"),
-                  required = FALSE,
-                  multiple = FALSE),
+  arriveAt = list(
+    values = lubridate::as_datetime("2020-01-01 10:30:00"),
+    required = FALSE,
+    multiple = FALSE
+  ),
 
   avoid = list(
     values = c(
@@ -19,17 +21,15 @@ pkg.env$template_params_directions <- list(
     multiple = TRUE
   ),
 
-  departAt = list(values = lubridate::as_datetime("2020-01-01 10:30:00"),
-                  required = FALSE,
-                  multiple = FALSE),
+  departAt = list(
+    values = lubridate::as_datetime("2020-01-01 10:30:00"),
+    required = FALSE,
+    multiple = FALSE
+  ),
 
-  heading = list(values = 0:364,
-                 required = FALSE,
-                 multiple = FALSE),
+  heading = list(values = 0:364, required = FALSE, multiple = FALSE),
 
-  maxRouteCount = list(values = 1:6,
-                       required = TRUE,
-                       multiple = FALSE),
+  maxRouteCount = list(values = 1:6, required = TRUE, multiple = FALSE),
 
   optimizeRoute = list(
     values = c(
@@ -42,9 +42,11 @@ pkg.env$template_params_directions <- list(
     multiple = FALSE
   ),
 
-  optimizeWaypointOrder = list(values = c(FALSE, TRUE),
-                               required = FALSE,
-                               multiple = FALSE),
+  optimizeWaypointOrder = list(
+    values = c(FALSE, TRUE),
+    required = FALSE,
+    multiple = FALSE
+  ),
 
   routeOutputOptions = list(
     values = c("routeSummary", "routePath", "itinerary"),
@@ -75,22 +77,30 @@ pkg.env$template_params_directions <- list(
 #' check_params(params,template_params,"UTC")
 #' }
 
-check_params <- function(test_params, template_params,tz){
-
-  if (sum(duplicated(names(test_params)))>0){
+check_params <- function(test_params, template_params, tz) {
+  if (sum(duplicated(names(test_params))) > 0) {
     dupl_names <- unique(names(test_params)[duplicated(names(test_params))])
-    stop("There are some duplicated names in params",
-         paste(dupl_names,collapse = ", "),call. = FALSE)
+    stop(
+      "There are some duplicated names in params",
+      paste(dupl_names, collapse = ", "),
+      call. = FALSE
+    )
   }
 
-  if (!all(names(test_params) %in% names(template_params))){
-    different_names <- names(test_params)[!(names(test_params) %in% names(template_params))]
-    stop("Elements in the params list do not match allowed arguments:",
-         paste(different_names,collapse = ", "),call. = FALSE)
+  if (!all(names(test_params) %in% names(template_params))) {
+    different_names <- names(test_params)[
+      !(names(test_params) %in% names(template_params))
+    ]
+    stop(
+      "Elements in the params list do not match allowed arguments:",
+      paste(different_names, collapse = ", "),
+      call. = FALSE
+    )
   }
 
   check_classes <- vapply(
-    names(test_params), function(i) {
+    names(test_params),
+    function(i) {
       # check type
       template_class <- class(template_params[[i]]$value)
 
@@ -104,7 +114,9 @@ check_params <- function(test_params, template_params,tz){
 
       input_class <- class(test_params[[i]])
       template_class == input_class
-    }, logical(1))
+    },
+    logical(1)
+  )
 
   # Stop if any is false
   if (any(!check_classes)) {
@@ -116,7 +128,8 @@ check_params <- function(test_params, template_params,tz){
   }
 
   check_values <- vapply(
-    names(test_params), function(i) {
+    names(test_params),
+    function(i) {
       # check type
       template_class <- class(template_params[[i]]$value)
       logical_multiple <- template_params[[i]]$multiple
@@ -126,17 +139,18 @@ check_params <- function(test_params, template_params,tz){
       }
 
       if (any(template_class == "POSIXct")) {
-        test_params[[i]] <- lubridate::as_datetime(test_params[[i]],
-                                                   quiet = T,
-                                                   tz = tz)
+        test_params[[i]] <- lubridate::as_datetime(
+          test_params[[i]],
+          quiet = T,
+          tz = tz
+        )
 
-        test_params[[i]] <- lubridate::with_tz(test_params[[i]],"UTC")
+        test_params[[i]] <- lubridate::with_tz(test_params[[i]], "UTC")
 
-        std_time <- lubridate::with_tz(Sys.time(),"UTC")
+        std_time <- lubridate::with_tz(Sys.time(), "UTC")
 
         future_check <- std_time < test_params[[i]]
         check_match <- !is.na(test_params[[i]]) & future_check
-
       } else {
         if (logical_multiple) {
           check_match <- all(test_params[[i]] %in% template_params[[i]]$value)
@@ -144,12 +158,12 @@ check_params <- function(test_params, template_params,tz){
           check_match <- (length(test_params[[i]]) == 1) &
             (test_params[[i]] %in% template_params[[i]]$value)
         }
-
       }
 
       check_match
-
-    }, logical(1))
+    },
+    logical(1)
+  )
 
   # Stop if any is false
   if (any(!check_classes)) {
@@ -160,14 +174,12 @@ check_params <- function(test_params, template_params,tz){
     )
   }
 
-  if(sum(c("departAt","arriveAt") %in% names(test_params))>1){
+  if (sum(c("departAt", "arriveAt") %in% names(test_params)) > 1) {
     stop("departAt  and arriveAt cannot be provided at the same time")
   }
 
   return(NULL)
-
 }
-
 
 
 #' Convert 'Azure Maps' JSON Response to an sf Object
@@ -193,69 +205,58 @@ check_params <- function(test_params, template_params,tz){
 #' route_sf <- json_to_sf(body)
 #' plot(sf::st_geometry(route_sf))
 #' }
-json_to_sf <- function(body,
-                       main_route = TRUE,
-                       linestring = TRUE){
-
-
-
+json_to_sf <- function(body, main_route = TRUE, linestring = TRUE) {
   # verify if geojson is present
 
-  if(main_route){
+  if (main_route) {
     body[["alternativeRoutes"]] <- NULL
   } else {
-    body <- unlist(body[["alternativeRoutes"]],recursive = F)
+    body <- unlist(body[["alternativeRoutes"]], recursive = F)
   }
 
-  if (is.null(body)){
+  if (is.null(body)) {
     return(NULL)
   }
 
-  if(body$type!="FeatureCollection"){
+  if (body$type != "FeatureCollection") {
     return(NULL)
   }
 
   body$type <- jsonlite::unbox(body$type)
 
-  null_feature = ifelse(linestring,"Point","MultiLineString")
+  null_feature = ifelse(linestring, "Point", "MultiLineString")
 
-
-  body$features <- lapply(body$features, function(x){
-    if (x$geometry$type == null_feature){
+  body$features <- lapply(body$features, function(x) {
+    if (x$geometry$type == null_feature) {
       return(NULL)
-    }else{
+    } else {
       x
     }
-  }
-  )
+  })
 
-  body <- rlist::list.clean(body,recursive = T)
+  body <- rlist::list.clean(body, recursive = T)
 
-
-  for (i in seq_along(body$features)){
-
+  for (i in seq_along(body$features)) {
     coords_depth <- purrr::pluck_depth(body$features[[i]]$geometry$coordinates)
 
-    if(coords_depth>2){
-      new_coords <- purrr::modify_depth(body$features[[i]]$geometry$coordinates,
-                                        .depth = coords_depth - 2,
-                                        .f = unlist)
-    }else{
+    if (coords_depth > 2) {
+      new_coords <- purrr::modify_depth(
+        body$features[[i]]$geometry$coordinates,
+        .depth = coords_depth - 2,
+        .f = unlist
+      )
+    } else {
       new_coords <- unlist(body$features[[i]]$geometry$coordinates)
     }
 
-
     body$features[[i]]$geometry$coordinates <- new_coords
-
   }
 
-
   # transform json to geojson and then to sf
-  body_json <- body |> jsonlite::toJSON(auto_unbox = T) |> geojsonsf::geojson_sf()
+  body_json <- body |>
+    jsonlite::toJSON(auto_unbox = T) |>
+    geojsonsf::geojson_sf()
 
   # export
   return(body_json)
-
-
 }
-

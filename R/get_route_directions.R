@@ -29,28 +29,33 @@
 #' response <- req_route_directions(origin, destination, waypoints, params)
 #' }
 #'
-req_route_directions <- function(origin,
-                                 destination,
-                                 waypoints = NULL,
-                                 params,
-                                 tz = Sys.timezone(),
-                                 api_key = get_azuremaps_token(),
-                                 api_version = "2025-01-01"){
-
-
+req_route_directions <- function(
+  origin,
+  destination,
+  waypoints = NULL,
+  params,
+  tz = Sys.timezone(),
+  api_key = get_azuremaps_token(),
+  api_version = "2025-01-01"
+) {
   # Essential Checks
-  tz  <-  match.arg(tz,OlsonNames())
+  tz <- match.arg(tz, OlsonNames())
   api_version <- match.arg(api_version)
 
   #Run body builders
 
   ## Create the GEOJson part
 
-  post_geojson <- POSTbody_builder_directions_geojson(origin, destination, waypoints)
+  post_geojson <- POSTbody_builder_directions_geojson(
+    origin,
+    destination,
+    waypoints
+  )
   post_json <- POSTbody_builder_directions_json(params, tz)
 
-  full_body <- c(post_geojson,post_json) |> jsonlite::toJSON(digits = 6) |> as.character()
-
+  full_body <- c(post_geojson, post_json) |>
+    jsonlite::toJSON(digits = 6) |>
+    as.character()
 
   # jsonlite::prettify(full_body)
 
@@ -59,7 +64,10 @@ req_route_directions <- function(origin,
 
   api_params <- list(`api-version` = api_version)
 
-  header <- list(`Content-Type` = "application/geo+json",`subscription-key` = api_key)
+  header <- list(
+    `Content-Type` = "application/geo+json",
+    `subscription-key` = api_key
+  )
 
   req <- httr2::request(base_url) |>
     httr2::req_url_query(!!!api_params) |>
@@ -69,7 +77,6 @@ req_route_directions <- function(origin,
   resp <- req |> httr2::req_perform()
 
   resp
-
 }
 
 
@@ -94,9 +101,9 @@ req_route_directions <- function(origin,
 #' all_routes_sf <- get_routes(response)
 #' plot(sf::st_geometry(all_routes_sf))
 #' }
-get_routes <- function(resp){
-  if(resp$status_code != 200) {
-    stop("Request was not succesfull",call. = FALSE)
+get_routes <- function(resp) {
+  if (resp$status_code != 200) {
+    stop("Request was not succesfull", call. = FALSE)
   }
 
   body <- resp |> httr2::resp_body_json()
@@ -104,10 +111,5 @@ get_routes <- function(resp){
   main_route <- json_to_sf(body)
   alt_routes <- json_to_sf(body, main_route = FALSE)
 
-  rbind(main_route,alt_routes)
-
+  rbind(main_route, alt_routes)
 }
-
-
-
-
