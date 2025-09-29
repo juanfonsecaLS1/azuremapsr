@@ -9,3 +9,6 @@
 ^data-raw$
 ^README_files/.*$
 ^CRAN-SUBMISSION$
+^[.]?air[.]toml$
+^\.vscode$
+^\.github$

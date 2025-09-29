@@ -7,29 +7,45 @@
 \alias{get_point.matrix}
 \alias{get_point.sf}
 \alias{get_point.sfc}
-\title{Create sfc Object from Coordinates or sf Object}
+\title{Create sfc Object from Coordinates or sf POINT Object}
 \usage{
-get_point(x)
+get_point(x, multiple = FALSE)
 
-\method{get_point}{default}(x)
+\method{get_point}{default}(x, multiple = FALSE)
 
-\method{get_point}{numeric}(x)
+\method{get_point}{numeric}(x, multiple = FALSE)
 
-\method{get_point}{matrix}(x)
+\method{get_point}{matrix}(x, multiple = FALSE)
 
-\method{get_point}{sf}(x)
+\method{get_point}{sf}(x, multiple = FALSE)
 
-\method{get_point}{sfc}(x)
+\method{get_point}{sfc}(x, multiple = FALSE)
 }
 \arguments{
-\item{x}{A numeric vector of length 2, a matrix with coordinates, or an sf object of POINT type.}
+\item{x}{A numeric vector of length 2, a matrix with two columns (coordinates), or an sf/sfc object of POINT type.}
+
+\item{multiple}{Logical; if TRUE, allows handling of multiple features (e.g., when input is an sfc or sf object with more than one POINT). Default is FALSE.}
 }
 \value{
 An sfc object with coordinates in EPSG:4326.
 }
 \description{
-Converts a pair of coordinates, a matrix of coordinates, or an sf POINT object into an sfc object for use in GeoJSON bodies.
+Converts a pair of coordinates (numeric vector), a matrix of coordinates, or an sf/sfc POINT object into an sfc object for use in GeoJSON bodies.
+Only POINT geometries are supported. The output is always in EPSG:4326.
 }
 \examples{
-get_point(c(-122.201399,47.608678))
+get_point(c(-122.201399, 47.608678))
+get_point(
+  matrix(
+    c(-122.201399, 47.608678, -122.202, 47.609),
+    ncol = 2,
+    byrow = TRUE
+  ),
+  multiple = TRUE
+)
+library(sf)
+pt <- st_sf(
+  geometry = st_sfc(st_point(c(-122.201399, 47.608678)), crs = 4326)
+)
+get_point(pt)
 }
